@@ -1,0 +1,12 @@
+@mixin fontStyle($size: 16px, $weight: 400, $color: #222) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+@mixin absoluteCenter {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+}
+@mixin flexCenter {
+  display: flex; align-items: center; justify-content: center;
+}
