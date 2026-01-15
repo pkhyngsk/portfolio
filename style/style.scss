@@ -1,11 +1,11 @@
-@use 'variable' as *;
+@use 'reset' as *;
+@use 'fonts' as *;
+@use 'variables' as *;
 @use 'mixin' as *;
 
 // common
-body {
-  min-width: 1280px; font-family: 'Pretendard', sans-serif;
-  .inner { max-width: 1920px; width: 100%; height: 100%; margin: 0 auto; }
-}
+body { min-width: 1280px; font-family: 'Pretendard', sans-serif; }
+.inner { max-width: 1920px; width: 100%; height: 100%; margin: 0 auto; }
 
 aside {
   width: 100%; height: 40px; background: $black;
@@ -38,9 +38,6 @@ header {
             display: flex; justify-content: center; align-items: center;
             width: 100%; height: 100%; padding: 0 15px; opacity: 0.5;
             @include fontStyle(16px, 600, $grey200);
-          }
-          &:last-child {
-            a { color: $black; opacity: 1; }
           }
           &:hover {
             a { opacity: 1; }
@@ -86,18 +83,35 @@ main {
         width: 100%; height: 100%; position: relative;
         &.swiper-slide-active {
           .contents {
-            &.profile { animation: opacityFirst 1.5s ease forwards; }
-            &:not(.profile) { animation: opacity 2s ease forwards; }
+            animation: mainFadeIn 1.5s ease forwards;
+            &.profile {
+              .circle { animation: mainRight 1.5s ease forwards; }
+            }
+            &.desc {
+              .desc-area {
+                img { animation: mainRight 1.5s ease forwards; }
+              }
+            }
           }
         }
-        .text { line-height: 1.2; }
         .contents {
           width: 1100px; height: 60%; padding: 20px;
           @include absoluteCenter;
+          .text { line-height: 1.2; z-index: 3; }
+          animation: mainFadeOut 1.5s ease forwards;
+          // 프로필
           &.profile {
             @include flexCenter;
-            .text { @include fontStyle(36px, 700, $grey200); }
+            .text { @include fontStyle(40px, 700, $grey200); }
+            .circle {
+              width: 40%; aspect-ratio: 1/1; border-radius: 50%;
+              position: absolute; left: 10%; top: 5%;
+              background: $green; z-index: 2;
+              animation: mainLeft 1.5s ease forwards;
+            }
           }
+
+          // 경력
           &.career {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             .career-list {
@@ -105,10 +119,10 @@ main {
               > li {
                 position: relative;
                 & + li {
-                  padding-top: 30px;
+                  padding-top: 40px;
                   &::before {
                     content: ''; width: 100%; height: 2px; background: $border;
-                    position: absolute; left: 0; top: 15px;
+                    position: absolute; left: 0; top: 20px;
                   }
                 }
                 .title { @include fontStyle(22px, 700, $grey200); }
@@ -126,21 +140,117 @@ main {
                   }
                 }
               }
-  
             }
             .text {
-              display: block; margin-top: 50px;
-              @include fontStyle(22px, 600, $grey200);
+              display: block; width: 55%; margin-top: 50px;
+              @include fontStyle(24px, 600, $grey200);
             }
           }
+
+          // 기술
+          &.skils {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            .skils-list {
+              width: 65%;
+              display: flex; align-items: flex-start; justify-content: space-between;
+              li {
+                .list-name { @include fontStyle(22px, 600, $grey200); text-align: center }
+                p {
+                  @include fontStyle(18px, 400, $grey200); line-height: 1.5;
+                  & + p { margin-top: 10px; }
+                }
+              }
+            }
+            .img { width: 30%; height: auto; margin: 30px auto; animation: above 2s ease infinite; }
+            .text {
+              display: block; width: 100%; text-align: center;
+              @include fontStyle(24px, 600, $grey200);
+            }
+          }
+
+          // 프로젝트
+          &.project {
+            .project-list {
+              width: 100%; height: 85%;
+              display: flex; flex-wrap: wrap; justify-content: space-between; align-content: space-between;
+              li {
+                width: 31%; height: 49%; padding: 10px; background: #f1f1f1;
+                display: flex; flex-direction: column; align-items: center; justify-content: center;
+                animation: above 2s ease infinite;
+                &:nth-child(2),
+                &:nth-child(5) { animation-delay: 0.2s; }
+                &:nth-child(3),
+                &:nth-child(6) { animation-delay: 0.4s; }
+                p { text-align: center; }
+                .title { @include fontStyle(22px, 600, $grey200); }
+                .sub-title { @include fontStyle(18px, 600, $grey200); margin-top: 20px }
+                .cont-text { @include fontStyle(16px, 400, $grey200); margin-top: 10px; line-height: 1.5; }
+                &:last-child {
+                  p { @include fontStyle(50px, 600, $grey200); }
+                }
+              }
+            }
+            .text {
+              display: flex; align-items: flex-end; justify-content: center;
+              width: 100%; height: calc(100% - 85%);
+              @include fontStyle(24px, 600, $grey200); text-align: center;
+            }
+          }
+
+          // 작업
+          &.works {
+            height: 80%; 
+            .works-area {
+              width: 100%; height: 100%; flex-direction: column;
+              @include flexCenter;
+              img { width: auto; height: 90%; object-fit: contain; animation: above 2s ease infinite; }
+              .text {
+                display: flex; align-items: flex-end; justify-content: center;
+                width: 100%; height: calc(100% - 90%);
+                @include fontStyle(24px, 600, $grey200); text-align: center;
+              }
+            }
+          }
+
+          // 설명
+          &.desc {
+            width: 1000px;
+            .desc-area {
+              display: flex; align-items: center; justify-content: space-around;
+              img {
+                width: 40%; aspect-ratio: 1/1; object-fit: contain; transform: translateX(-50%);
+                animation: mainLeft 1.5s ease forwards;
+              }
+              .sub-text {
+                text-align: center; line-height: 1.5;
+                @include fontStyle(22px, 400, $grey200);
+                span { @include fontStyle(32px, 700, $grey200); }
+              }
+            }
+          }
+
+          // end
+          &.end {
+            @include flexCenter;
+            strong { @include fontStyle(60px, 600, $grey200); z-index: 3; }
+          }
         }
+      }
+    }
+    .swiper-pagination {
+      display: flex; width: max-content; height: 10px;
+      left: 50%; top: auto; bottom: 3%; transform: translateX(-50%);
+      .swiper-pagination-bullet {
+        width: 7px; height: 10px; margin: 0; border-radius: 0;
+        &.swiper-pagination-bullet-active { background: $black; }
+        & + .swiper-pagination-bullet { margin-left: 5px; }
       }
     }
   }
 }
 
-@keyframes opacityFirst { 0% { opacity: 0; } 100% { opacity: 1; } }
-@keyframes opacity { 0% { opacity: 0; } 10% { opacity: 0; } 100% { opacity: 1; } }
-
-@keyframes moveRight { 0% { transform: translateX(-20%); } 100% { transform: translateX(0); } }
-@keyframes moveLeft { 0% { transform: translateX(20%); } 100% { transform: translateX(0); } }
+@keyframes mainFadeIn { 0% { opacity: 0; } 10% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes mainFadeOut { 0% { opacity: 1; } 10% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes mainRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+@keyframes mainLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes above { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
