@@ -1,0 +1,4 @@
+@use './_mixins' as *;
+@use './_variables' as *;
+
+header { background: $black; }
