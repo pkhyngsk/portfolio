@@ -1,4 +1,90 @@
 @use './_mixins' as *;
 @use './_variables' as *;
 
-header { background: $black; }
+html { scroll-behavior: smooth; overflow-x: auto; }
+body { font-family: 'Pretendard', sans-serif; min-width: 1600px; max-width: 1920px; }
+
+.inner { width: 100%; max-width: 1800px; margin: 0 auto; overflow: hidden; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden; white-space: nowrap;
+  border: 0; clip: rect(0, 0, 0, 0); clip-path: inset(50%);
+}
+
+.announcement-bar {
+  width: 100%; height: 30px; background: $gray300; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  p { @include fontStyle(12, $font-weight: 400, $color: $white); }
+  .v-btn { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); color: $white; }
+}
+header {
+  width: 100%; height: 60px; background: $white; border-bottom: 1px solid $gray200;
+  position: sticky; left: 0; top: 0; z-index: 30;
+  .inner {
+    height: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    .logo {
+      width: 80px; height: auto; aspect-ratio: 187/61;
+      background-color: $gray300; position: relative;
+      -webkit-mask: url('@/assets/images/logo.svg') no-repeat center;
+      mask: url('@/assets/images/logo.svg') no-repeat center;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      a { display: block; width: 100%; height: 100%; position: absolute; left: 0; top: 0; }
+      &:hover {
+        background-color: $black;
+      }
+    }
+    .main-menu {
+      .menu-list {
+        display: flex; gap: 30px;
+        li {
+          a {
+            @include fontStyle(14, $font-weight: 500, $color: $gray300);
+          }
+          &:hover {
+            a {
+              color: $black;
+              text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px;
+            }
+          }
+        }
+      }
+    }
+    .util-menu {
+      .menu-list {
+        display: flex; gap: 5px;
+        li {
+          .v-btn {
+            color: $gray300;
+            &:hover { color: $black; }
+          }
+        }
+      }
+    }
+  }
+}
+footer {
+  width: 100%; padding: 30px 0; background: $white; border-top: 1px solid $gray200;
+  .inner {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    .info {
+      width: auto; height: 100%;
+      .logo {
+        width: 80px; height: auto; aspect-ratio: 187/61;
+        background-color: $gray300;
+        -webkit-mask: url('@/assets/images/logo.svg') no-repeat center;
+        mask: url('@/assets/images/logo.svg') no-repeat center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        & + .info-list { margin-top: 10px; }
+      }
+      .info-list {
+        li {
+          @include fontStyle(12, $color: $gray300, $font-weight: 500);
+        }
+      }
+      &:last-child { padding-right: 400px; }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@mixin fontStyle(
+  $font-size,
+  $font-weight: 400,
+  $line-height: 1.5,
+  $color: inherit
+) {
+  font-size: #{$font-size}px;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  color: $color;
+}

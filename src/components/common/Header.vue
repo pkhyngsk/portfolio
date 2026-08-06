@@ -1,50 +1,64 @@
 <script setup>
-const mainMenu = [
-  {
-    title: 'HOME',
-    link: '/'
-  },
-  {
-    title: 'SHOP',
-    link: '/shop'
-  },
-  {
-    title: 'ABOUT',
-    link: '/about'
-  },
-  {
-    title: 'ARCHIVE',
-    link: '/archive'
-  },
-]
+  import { ref } from 'vue'
+
+  const mainMenu = [
+    {
+      title: 'HOME',
+      link: '#home'
+    },
+    {
+      title: 'ABOUT',
+      link: '#about'
+    },
+    {
+      title: 'WORKS',
+      link: '#works'
+    },
+    {
+      title: 'CONTACT',
+      link: '#contact'
+    },
+  ]
 </script>
 
 <template>
+  <div class="announcement-bar">
+    <p>박형석 | PORTFOLIO</p>
+  </div>
   <header>
     <div class="inner">
       <div class="logo">
-        <img src="" alt="logo">
+        <span class="sr-only">logo</span>
+        <a href="#home"></a>
       </div>
       <nav class="main-menu">
-        <ul class="main-menu-list">
+        <ul class="menu-list">
           <li v-for="item in mainMenu" :key="item.title">
-            <RouterLink :to="item.link">{{ item.title }}</RouterLink>
+            <a :href="item.link">{{ item.title }}</a>
           </li>
         </ul>
       </nav>
       <div class="util-menu">
-        <ul>
+        <ul class="menu-list">
           <li>
-            <v-btn class="search-btn"></v-btn>
+            <v-btn icon variant="text" size="36">
+              <v-icon size="24">mdi-magnify</v-icon>
+            </v-btn>
           </li>
           <li>
-            <v-btn class="like-btn"></v-btn>
+            <v-btn icon variant="text" size="36">
+              <v-icon size="24">mdi-heart-outline</v-icon>
+            </v-btn>
           </li>
           <li>
-            <v-btn class="cart-btn"></v-btn>
+            <v-btn icon variant="text" size="36">
+              <v-icon size="24">mdi-cart-outline</v-icon>
+            </v-btn>
           </li>
           <li>
-            <v-btn class="profile-btn"></v-btn>
+            <v-btn icon variant="text" size="36">
+              <v-icon size="24">mdi-account-outline</v-icon>
+            </v-btn>
           </li>
         </ul>
       </div>
