@@ -11,8 +11,8 @@
       link: '#about'
     },
     {
-      title: 'WORKS',
-      link: '#works'
+      title: 'PROJECT',
+      link: '#project'
     },
     {
       title: 'CONTACT',

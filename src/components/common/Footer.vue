@@ -15,8 +15,8 @@
       <div class="info">
         <ul class="info-list">
           <li>문의 : <button>ONLINE CHAT</button></li>
-          <li>운영시간 : 10:00 - 15:00 (MON-FRI)</li>
-          <li>점심시간 : 11:30 - 13:30</li>
+          <li>운영시간 : 00:00 - 00:00 (MON-FRI)</li>
+          <li>점심시간 : 00:00 - 00:30</li>
           <li>구매안전 (에스크로) 서비스 가입사실 확인</li>
         </ul>
       </div>
